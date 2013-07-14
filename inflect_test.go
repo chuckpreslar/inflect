@@ -4,6 +4,28 @@ import (
   "testing"
 )
 
+func TestPluralize(t *testing.T) {
+  tests := []string{"half", "potato", "cello", "disco", "chef", "wife", "poppy", "sty", "football", "tester", "play", "hero", "tooth", "mouse", "goose", "person", "foot", "money", "monkey", "calf", "lie"}
+  results := []string{"halves", "potatoes", "cellos", "discos", "chefs", "wives", "poppies", "sties", "footballs", "testers", "plays", "heroes", "teeth", "mice", "geese", "people", "feet", "money", "monkeys", "calves", "lies"}
+
+  for index, test := range tests {
+    if result := Pluralize(test); result != results[index] {
+      t.Errorf("Expected %v, got %v", results[index], result)
+    }
+  }
+}
+
+func TestCommonPluralize(t *testing.T) {
+  tests := []string{"user", "order", "product", "verse", "test", "upload", "class", "course", "game", "score", "body", "life", "dice"}
+  results := []string{"users", "orders", "products", "verses", "tests", "uploads", "classes", "courses", "games", "scores", "bodies", "lives", "die"}
+
+  for index, test := range tests {
+    if result := Pluralize(test); result != results[index] {
+      t.Errorf("Expected %v, got %v", results[index], result)
+    }
+  }
+}
+
 func TestUpperCamelCase(t *testing.T) {
   tests := []string{"single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
   results := []string{"Single", "LowerCamelCase", "UnderScored", "HyphenAted", "UpperCamelCase", "SpacedOut"}
@@ -48,6 +70,17 @@ func TestHyphenate(t *testing.T) {
   }
 }
 
+func TestConstantize(t *testing.T) {
+  tests := []string{"single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
+  results := []string{"SINGLE", "LOWER_CAMEL_CASE", "UNDER_SCORED", "HYPHEN_ATED", "UPPER_CAMEL_CASE", "SPACED_OUT"}
+
+  for index, test := range tests {
+    if result := Constantize(test); result != results[index] {
+      t.Errorf("Expected %v, got %v", results[index], result)
+    }
+  }
+}
+
 func TestHumanize(t *testing.T) {
   tests := []string{"single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
   results := []string{"Single", "Lower camel case", "Under scored", "Hyphen ated", "Upper camel case", "Spaced out"}
@@ -65,17 +98,6 @@ func TestTitleize(t *testing.T) {
 
   for index, test := range tests {
     if result := Titleize(test); result != results[index] {
-      t.Errorf("Expected %v, got %v", results[index], result)
-    }
-  }
-}
-
-func TestConstantize(t *testing.T) {
-  tests := []string{"single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
-  results := []string{"SINGLE", "LOWER_CAMEL_CASE", "UNDER_SCORED", "HYPHEN_ATED", "UPPER_CAMEL_CASE", "SPACED_OUT"}
-
-  for index, test := range tests {
-    if result := Constantize(test); result != results[index] {
       t.Errorf("Expected %v, got %v", results[index], result)
     }
   }

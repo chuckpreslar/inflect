@@ -15,19 +15,38 @@ type Rule struct {
 
 // List of pluralization rules in order by precedence.
 var plurals = []Rule{
-  Rule{regexp.MustCompile(`(auto|kangaroo|kilo|memo|photo|piano|pimento|pro|solo|soprano|studio|tattoo|video|zoo)$`), `s`, true},
-  Rule{regexp.MustCompile(`(ex|ix)$`), `ices`, false},
-  Rule{regexp.MustCompile(`(oo)`), `ee`, false},
-  Rule{regexp.MustCompile(`(er)$`), `ers`, false},
-  Rule{regexp.MustCompile(`(s|ss|sh|ch|x|o|is)$`), `es`, true},
-  Rule{regexp.MustCompile(`(a|e|o)y$`), `s`, true},
+  Rule{regexp.MustCompile(`(ife)$`), `ives`, false},
+  Rule{regexp.MustCompile(`(ef|ff|of|ay|ey|iy|oy|uy)$`), `s`, true},
+  Rule{regexp.MustCompile(`(ice)$`), `ie`, false},
+  Rule{regexp.MustCompile(`(house)$`), `houses`, false},
+  Rule{regexp.MustCompile(`(blouse)$`), `blouses`, false},
+  Rule{regexp.MustCompile(`(ouse)$`), `ice`, false},
+  Rule{regexp.MustCompile(`(oo)th$`), `eeth`, false},
+  Rule{regexp.MustCompile(`(oo)t$`), `eet`, false},
+  Rule{regexp.MustCompile(`(oo)se$`), `eese`, false},
+  Rule{regexp.MustCompile(`(f)$`), `ves`, false},
   Rule{regexp.MustCompile(`(y)$`), `ies`, false},
-  Rule{regexp.MustCompile(`(on)$`), `a`, false},
+  Rule{regexp.MustCompile(`(s|x|z|ch|sh)$`), `es`, true},
+  Rule{regexp.MustCompile(`(to|ro|ho|jo)$`), `es`, true},
+  Rule{regexp.MustCompile(`(person)`), `people`, false},
 }
+
+var (
+  //FIXME: This should probably be read in from a file.
+  uncountables = []string{`fish`, `sheep`, `deer`, `tuna`, `salmon`, `trout`, `music`, `art`, `love`, `happiness`, `advice`, `information`, `news`, `furniture`, `luggage`, `rice`, `sugar`, `butter`, `water`, `electricity`, `gas`, `power`, `money`, `currency`, `scenery`}
+  compiled     = strings.Join(uncountables, ` `)
+)
+
+// List of singularization rules in order by precedence.
+var singulars = []Rule{}
 
 // Plural returns the pluralized form of the word if a
 // matched rule is found, else the original string is returned.
-func Plural(str string) string {
+func Pluralize(str string) string {
+  if 0 <= strings.Index(compiled, str) {
+    return str
+  }
+
   for _, rule := range plurals {
     if rule.Regexp.MatchString(str) {
       if rule.Append {
@@ -38,12 +57,18 @@ func Plural(str string) string {
     }
   }
 
-  return str
+  return fmt.Sprintf(`%v%v`, str, `s`)
 }
 
 // Converts a plural string to it's singular form.
 // FIX ME: NOT IMPLEMENTED.
-func Singular(str string) string {
+func Singularize(str string) string {
+  for _, rule := range singulars {
+    if rule.Regexp.MatchString(str) {
+      return rule.Regexp.ReplaceAllString(str, rule.Replace)
+    }
+  }
+
   return str
 }
 
@@ -139,6 +164,17 @@ func Hyphenate(str string) string {
   return strings.Join(pieces, `-`)
 }
 
+// Converts a string to it's constantized version.
+func Constantize(str string) string {
+  pieces := split(str)
+
+  for index, piece := range pieces {
+    pieces[index] = strings.ToUpper(piece)
+  }
+
+  return strings.Join(pieces, `_`)
+}
+
 // Converts a string to it's humanized version.
 func Humanize(str string) string {
   pieces := split(str)
@@ -161,15 +197,4 @@ func Titleize(str string) string {
   }
 
   return strings.Join(pieces, ` `)
-}
-
-// Converts a string to it's constantized version.
-func Constantize(str string) string {
-  pieces := split(str)
-
-  for index, piece := range pieces {
-    pieces[index] = strings.ToUpper(piece)
-  }
-
-  return strings.Join(pieces, `_`)
 }
