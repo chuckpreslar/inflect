@@ -139,6 +139,30 @@ func Hyphenate(str string) string {
   return strings.Join(pieces, `-`)
 }
 
+// Converts a string to it's humanized version.
+func Humanize(str string) string {
+  pieces := split(str)
+
+  pieces[0] = fmt.Sprintf(`%v%v`, strings.ToUpper(string(pieces[0][0])), pieces[0][1:])
+
+  for i := 1; i < len(pieces); i++ {
+    pieces[i] = fmt.Sprintf(`%v`, strings.ToLower(pieces[i]))
+  }
+
+  return strings.Join(pieces, ` `)
+}
+
+// Converts a string to it's titleized version.
+func Titleize(str string) string {
+  pieces := split(str)
+
+  for i := 0; i < len(pieces); i++ {
+    pieces[i] = fmt.Sprintf(`%v%v`, strings.ToUpper(string(pieces[i][0])), pieces[i][1:])
+  }
+
+  return strings.Join(pieces, ` `)
+}
+
 // Converts a string to it's constantized version.
 func Constantize(str string) string {
   pieces := split(str)

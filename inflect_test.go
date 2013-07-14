@@ -48,6 +48,28 @@ func TestHyphenate(t *testing.T) {
   }
 }
 
+func TestHumanize(t *testing.T) {
+  tests := []string{"single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
+  results := []string{"Single", "Lower camel case", "Under scored", "Hyphen ated", "Upper camel case", "Spaced out"}
+
+  for index, test := range tests {
+    if result := Humanize(test); result != results[index] {
+      t.Errorf("Expected %v, got %v", results[index], result)
+    }
+  }
+}
+
+func TestTitleize(t *testing.T) {
+  tests := []string{"single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
+  results := []string{"Single", "Lower Camel Case", "Under Scored", "Hyphen Ated", "Upper Camel Case", "Spaced Out"}
+
+  for index, test := range tests {
+    if result := Titleize(test); result != results[index] {
+      t.Errorf("Expected %v, got %v", results[index], result)
+    }
+  }
+}
+
 func TestConstantize(t *testing.T) {
   tests := []string{"single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
   results := []string{"SINGLE", "LOWER_CAMEL_CASE", "UNDER_SCORED", "HYPHEN_ATED", "UPPER_CAMEL_CASE", "SPACED_OUT"}
