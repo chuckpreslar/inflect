@@ -128,6 +128,17 @@ func Underscore(str string) string {
   return strings.Join(pieces, `_`)
 }
 
+// Converts a string to it's underscored version.
+func Hyphenate(str string) string {
+  pieces := split(str)
+
+  for index, piece := range pieces {
+    pieces[index] = strings.ToLower(piece)
+  }
+
+  return strings.Join(pieces, `-`)
+}
+
 // Converts a string to it's constantized version.
 func Constantize(str string) string {
   pieces := split(str)
