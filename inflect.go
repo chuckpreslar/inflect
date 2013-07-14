@@ -30,16 +30,34 @@ var plurals = []Rule{
   Rule{regexp.MustCompile(`(s|x|z|ch|sh)$`), `es`, true},
   Rule{regexp.MustCompile(`(to|ro|ho|jo)$`), `es`, true},
   Rule{regexp.MustCompile(`(person)`), `people`, false},
+  Rule{regexp.MustCompile(`(child)`), `children`, false},
 }
 
 var (
-  //FIXME: This should probably be read in from a file.
+  // FIXME: This should probably be read in from a file.
   uncountables = []string{`fish`, `sheep`, `deer`, `tuna`, `salmon`, `trout`, `music`, `art`, `love`, `happiness`, `advice`, `information`, `news`, `furniture`, `luggage`, `rice`, `sugar`, `butter`, `water`, `electricity`, `gas`, `power`, `money`, `currency`, `scenery`}
   compiled     = strings.Join(uncountables, ` `)
 )
 
 // List of singularization rules in order by precedence.
-var singulars = []Rule{}
+var singulars = []Rule{
+  Rule{regexp.MustCompile(`(ives)$`), `ife`, false},
+  Rule{regexp.MustCompile(`(ie)$`), `ice`, false},
+  Rule{regexp.MustCompile(`(ice)$`), `ouse`, false},
+  Rule{regexp.MustCompile(`(ee)th$`), `ooth`, false},
+  Rule{regexp.MustCompile(`(ee)t$`), `oot`, false},
+  Rule{regexp.MustCompile(`(ee)se$`), `oose`, false},
+  Rule{regexp.MustCompile(`(lies)`), `lie`, false},
+  Rule{regexp.MustCompile(`(ves)$`), `f`, false},
+  Rule{regexp.MustCompile(`(ies)$`), `y`, false},
+  Rule{regexp.MustCompile(`(rses)$`), `rse`, false},
+  Rule{regexp.MustCompile(`(res)$`), `re`, false},
+  Rule{regexp.MustCompile(`(mes)$`), `me`, false},
+  Rule{regexp.MustCompile(`(es)$`), ``, false},
+  Rule{regexp.MustCompile(`(s)$`), ``, false},
+  Rule{regexp.MustCompile(`(people)`), `person`, false},
+  Rule{regexp.MustCompile(`(children)`), `child`, false},
+}
 
 // Plural returns the pluralized form of the word if a
 // matched rule is found, else the original string is returned.
@@ -62,8 +80,11 @@ func Pluralize(str string) string {
 }
 
 // Converts a plural string to it's singular form.
-// FIX ME: NOT IMPLEMENTED.
 func Singularize(str string) string {
+  if 0 <= strings.Index(compiled, str) {
+    return str
+  }
+
   for _, rule := range singulars {
     if rule.Regexp.MatchString(str) {
       return rule.Regexp.ReplaceAllString(str, rule.Replace)
@@ -76,7 +97,7 @@ func Singularize(str string) string {
 // Split's a string so that it can be converted to a different casing.
 // Splits on underscores, hyphens, spaces and camel casing.
 func split(str string) (pieces []string) {
-  //FIXME: Go's Regexp's annoy me.
+  // FIXME: Go's Regexp's annoy me.
   str = strings.Trim(str, `_`)
   str = strings.Trim(str, `-`)
   str = strings.Trim(str, ` `)

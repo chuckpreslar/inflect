@@ -26,6 +26,28 @@ func TestCommonPluralize(t *testing.T) {
   }
 }
 
+func TestSingularization(t *testing.T) {
+  tests := []string{"halves", "potatoes", "cellos", "discos", "chefs", "wives", "poppies", "sties", "footballs", "testers", "plays", "heroes", "teeth", "mice", "geese", "people", "feet", "money", "monkeys", "calves", "lies", "autos", "studios"}
+  results := []string{"half", "potato", "cello", "disco", "chef", "wife", "poppy", "sty", "football", "tester", "play", "hero", "tooth", "mouse", "goose", "person", "foot", "money", "monkey", "calf", "lie", "auto", "studio"}
+
+  for index, test := range tests {
+    if result := Singularize(test); result != results[index] {
+      t.Errorf("Expected %v, got %v", results[index], result)
+    }
+  }
+}
+
+func TestCommonSingularization(t *testing.T) {
+  tests := []string{"users", "orders", "products", "verses", "tests", "uploads", "classes", "courses", "games", "scores", "bodies", "lives", "die"}
+  results := []string{"user", "order", "product", "verse", "test", "upload", "class", "course", "game", "score", "body", "life", "dice"}
+
+  for index, test := range tests {
+    if result := Singularize(test); result != results[index] {
+      t.Errorf("Expected %v, got %v", results[index], result)
+    }
+  }
+}
+
 func TestUpperCamelCase(t *testing.T) {
   tests := []string{"_pre", "post_", "    spaced","single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
   results := []string{"Pre", "Post", "Spaced", "Single", "LowerCamelCase", "UnderScored", "HyphenAted", "UpperCamelCase", "SpacedOut"}
