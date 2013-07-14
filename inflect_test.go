@@ -5,8 +5,8 @@ import (
 )
 
 func TestPluralize(t *testing.T) {
-  tests := []string{"half", "potato", "cello", "disco", "chef", "wife", "poppy", "sty", "football", "tester", "play", "hero", "tooth", "mouse", "goose", "person", "foot", "money", "monkey", "calf", "lie"}
-  results := []string{"halves", "potatoes", "cellos", "discos", "chefs", "wives", "poppies", "sties", "footballs", "testers", "plays", "heroes", "teeth", "mice", "geese", "people", "feet", "money", "monkeys", "calves", "lies"}
+  tests := []string{"half", "potato", "cello", "disco", "chef", "wife", "poppy", "sty", "football", "tester", "play", "hero", "tooth", "mouse", "goose", "person", "foot", "money", "monkey", "calf", "lie", "auto", "studio"}
+  results := []string{"halves", "potatoes", "cellos", "discos", "chefs", "wives", "poppies", "sties", "footballs", "testers", "plays", "heroes", "teeth", "mice", "geese", "people", "feet", "money", "monkeys", "calves", "lies", "autos", "studios"}
 
   for index, test := range tests {
     if result := Pluralize(test); result != results[index] {
