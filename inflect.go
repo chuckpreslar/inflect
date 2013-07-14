@@ -14,10 +14,13 @@ type Rule struct {
 var plurals = []Rule{
   // Rules should be ordered by precedence.
   Rule{regexp.MustCompile(`(auto|kangaroo|kilo|memo|photo|piano|pimento|pro|solo|soprano|studio|tattoo|video|zoo)$`), `s`, true},
+  Rule{regexp.MustCompile(`(ex|ix)$`), `ices`, false},
+  Rule{regexp.MustCompile(`(oo)`), `ee`, false},
   Rule{regexp.MustCompile(`(er)$`), `ers`, false},
-  Rule{regexp.MustCompile(`(s|ss|sh|ch|x|o)$`), `es`, true},
+  Rule{regexp.MustCompile(`(s|ss|sh|ch|x|o|is)$`), `es`, true},
   Rule{regexp.MustCompile(`(a|e|o)y$`), `s`, true},
   Rule{regexp.MustCompile(`(y)$`), `ies`, false},
+  Rule{regexp.MustCompile(`(on)$`), `a`, false},
 }
 
 func Plural(str string) string {
@@ -28,6 +31,7 @@ func Plural(str string) string {
       } else {
         return rule.Regexp.ReplaceAllString(str, rule.Replace)
       }
+      break
     }
   }
 
