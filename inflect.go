@@ -76,6 +76,11 @@ func Singularize(str string) string {
 // Split's a string so that it can be converted to a different casing.
 // Splits on underscores, hyphens, spaces and camel casing.
 func split(str string) (pieces []string) {
+  //FIXME: Go's Regexp's annoy me.
+  str = strings.Trim(str, `_`)
+  str = strings.Trim(str, `-`)
+  str = strings.Trim(str, ` `)
+
   var (
     current int
     next    int

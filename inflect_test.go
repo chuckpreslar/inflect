@@ -27,8 +27,8 @@ func TestCommonPluralize(t *testing.T) {
 }
 
 func TestUpperCamelCase(t *testing.T) {
-  tests := []string{"single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
-  results := []string{"Single", "LowerCamelCase", "UnderScored", "HyphenAted", "UpperCamelCase", "SpacedOut"}
+  tests := []string{"_pre", "post_", "single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
+  results := []string{"Pre", "Post","Single", "LowerCamelCase", "UnderScored", "HyphenAted", "UpperCamelCase", "SpacedOut"}
 
   for index, test := range tests {
     if result := UpperCamelCase(test); result != results[index] {
