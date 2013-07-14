@@ -3,6 +3,7 @@ package inflect
 import (
   "fmt"
   "regexp"
+  "strings"
 )
 
 // Rule struct represents a linguistic pluralization/singularization rule.
@@ -40,6 +41,100 @@ func Plural(str string) string {
   return str
 }
 
+// Converts a plural string to it's singular form.
+// FIX ME: NOT IMPLEMENTED.
 func Singular(str string) string {
   return str
+}
+
+// Split's a string so that it can be converted to a different casing.
+// Splits on underscores, hyphens, spaces and camel casing.
+func split(str string) (pieces []string) {
+  var (
+    current int
+    next    int
+    end     int
+  )
+
+  for 0 < len(str) {
+    end = len(str)
+    next = current + 1
+
+    if end <= next {
+      pieces = append(pieces, str)
+      break
+    }
+
+    if isLowerCase(str[current]) && isUpperCase(str[next]) {
+      pieces = append(pieces, str[:next])
+      str = str[next:]
+      current = 0
+    } else if '-' == str[current] || '_' == str[current] || ' ' == str[current] {
+      pieces = append(pieces, str[:current])
+      str = str[next:]
+      current = 0
+    } else {
+      current++
+    }
+  }
+
+  return pieces
+}
+
+// Checks if a single character is upper cased.
+func isUpperCase(c uint8) (matched bool) {
+  matched, _ = regexp.MatchString(`[A-Z]`, string(c))
+  return
+}
+
+// Checks if a single character is lower cased.
+func isLowerCase(c uint8) (matched bool) {
+  matched, _ = regexp.MatchString(`[a-z]`, string(c))
+  return
+}
+
+// Converts a string to it's upper camel case version.
+func UpperCamelCase(str string) string {
+  pieces := split(str)
+
+  for index, s := range pieces {
+    pieces[index] = fmt.Sprintf(`%v%v`, strings.ToUpper(string(s[0])), s[1:])
+  }
+
+  return strings.Join(pieces, ``)
+}
+
+// Converts a string to it's lower camel case version.
+func LowerCamelCase(str string) string {
+  pieces := split(str)
+
+  pieces[0] = fmt.Sprintf(`%v%v`, strings.ToLower(string(pieces[0][0])), pieces[0][1:])
+
+  for i := 1; i < len(pieces); i++ {
+    pieces[i] = fmt.Sprintf(`%v%v`, strings.ToUpper(string(pieces[i][0])), pieces[i][1:])
+  }
+
+  return strings.Join(pieces, ``)
+}
+
+// Converts a string to it's underscored version.
+func Underscore(str string) string {
+  pieces := split(str)
+
+  for index, piece := range pieces {
+    pieces[index] = strings.ToLower(piece)
+  }
+
+  return strings.Join(pieces, `_`)
+}
+
+// Converts a string to it's constantized version.
+func Constantize(str string) string {
+  pieces := split(str)
+
+  for index, piece := range pieces {
+    pieces[index] = strings.ToUpper(piece)
+  }
+
+  return strings.Join(pieces, `_`)
 }
