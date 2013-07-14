@@ -31,10 +31,9 @@ func Plural(str string) string {
     if rule.Regexp.MatchString(str) {
       if rule.Append {
         return fmt.Sprintf(`%v%v`, str, rule.Replace)
-      } else {
-        return rule.Regexp.ReplaceAllString(str, rule.Replace)
       }
-      break
+
+      return rule.Regexp.ReplaceAllString(str, rule.Replace)
     }
   }
 
