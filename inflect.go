@@ -15,12 +15,10 @@ type Rule struct {
 
 // List of pluralization rules in order by precedence.
 var plurals = []Rule{
-  Rule{regexp.MustCompile(`(auto|kangaroo|kilo|memo|photo|piano|pimento|pro|solo|soprano|studio|tattoo|video|zoo)$`), `s`, true},
+  Rule{regexp.MustCompile(`(auto|kangaroo|kilo|memo|photo|piano|pimento|pro|solo|soprano|studio|tattoo|video|zoo|house|blouse)$`), `s`, true},
   Rule{regexp.MustCompile(`(ife)$`), `ives`, false},
   Rule{regexp.MustCompile(`(ef|ff|of|ay|ey|iy|oy|uy)$`), `s`, true},
   Rule{regexp.MustCompile(`(ice)$`), `ie`, false},
-  Rule{regexp.MustCompile(`(house)$`), `houses`, false},
-  Rule{regexp.MustCompile(`(blouse)$`), `blouses`, false},
   Rule{regexp.MustCompile(`(ouse)$`), `ice`, false},
   Rule{regexp.MustCompile(`(oo)th$`), `eeth`, false},
   Rule{regexp.MustCompile(`(oo)t$`), `eet`, false},
