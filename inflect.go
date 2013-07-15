@@ -51,8 +51,7 @@ var singulars = []Rule{
   Rule{regexp.MustCompile(`(rses)$`), `rse`, false},
   Rule{regexp.MustCompile(`(res)$`), `re`, false},
   Rule{regexp.MustCompile(`(mes)$`), `me`, false},
-  Rule{regexp.MustCompile(`(es)$`), ``, false},
-  Rule{regexp.MustCompile(`(s)$`), ``, false},
+  Rule{regexp.MustCompile(`(es|s)$`), ``, false},
   Rule{regexp.MustCompile(`(people)`), `person`, false},
   Rule{regexp.MustCompile(`(children)`), `child`, false},
 }

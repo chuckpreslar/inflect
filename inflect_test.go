@@ -49,7 +49,7 @@ func TestCommonSingularization(t *testing.T) {
 }
 
 func TestUpperCamelCase(t *testing.T) {
-  tests := []string{"_pre", "post_", "    spaced","single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
+  tests := []string{"_pre", "post_", "    spaced", "single", "lowerCamelCase", "under_scored", "hyphen-ated", "UpperCamelCase", "spaced Out"}
   results := []string{"Pre", "Post", "Spaced", "Single", "LowerCamelCase", "UnderScored", "HyphenAted", "UpperCamelCase", "SpacedOut"}
 
   for index, test := range tests {
