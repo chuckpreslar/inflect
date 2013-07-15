@@ -21,6 +21,8 @@ func main() {
   inflect.Pluralize("user") // users
   inflect.Pluralize("knife") // knives
   
+  inflect.Singularize("orders") // order
+  
   inflect.UpperCamelCase("this_is_underscored_mixedCased-And-Hyphenated") // ThisIsUnderscoredMixedCasedAndHyphenated
 }
 ```
