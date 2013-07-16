@@ -8,13 +8,13 @@ type LanguageType struct {
   Uncountables     UncountablesType
 }
 
-func (self *LanguageType) Pluralize(str string) string {
-  if self.Uncountables.Contains(str) {
+func convert(str string, language *LanguageType, rules RulesType) string {
+  if language.Uncountables.Contains(str) {
     return str
-  } else if opposite, ok := self.Irregulars[str]; ok {
+  } else if opposite, ok := language.Irregulars[str]; ok {
     return opposite
   } else {
-    for _, rule := range self.Pluralizations {
+    for _, rule := range rules {
       if rule.Regexp.MatchString(str) {
         return rule.Regexp.ReplaceAllString(str, rule.Replacer)
       }
@@ -24,20 +24,12 @@ func (self *LanguageType) Pluralize(str string) string {
   return str
 }
 
-func (self *LanguageType) Singularize(str string) string {
-  if self.Uncountables.Contains(str) {
-    return str
-  } else if opposite, ok := self.Irregulars[str]; ok {
-    return opposite
-  } else {
-    for _, rule := range self.Singularizations {
-      if rule.Regexp.MatchString(str) {
-        return rule.Regexp.ReplaceAllString(str, rule.Replacer)
-      }
-    }
-  }
+func (self *LanguageType) Pluralize(str string) string {
+  return convert(str, self, self.Pluralizations)
+}
 
-  return str
+func (self *LanguageType) Singularize(str string) string {
+  return convert(str, self, self.Singularizations)
 }
 
 func (self *LanguageType) Plural(matcher, replacer string) *LanguageType {
