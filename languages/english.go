@@ -4,7 +4,7 @@ import (
   "github.com/chuckpreslar/inflect/types"
 )
 
-// FIXME: Singular/Plural rules could be better, I'm went to school for engineering, not English.
+// FIXME: Singular/Plural rules could be better, I went to school for engineering, not English.
 var English = types.Language("en").
   // Pluralization rules.
   Plural(`(auto)$`, `${1}s`).
