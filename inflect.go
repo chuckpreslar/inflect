@@ -25,6 +25,8 @@ func Singularize(str string) string {
 // Split's a string so that it can be converted to a different casing.
 // Splits on underscores, hyphens, spaces and camel casing.
 func split(str string) []string {
+  // FIXME: This isn't a perfect solution.
+  // ex. WEiRD CaSINg (Support for 13 year old developers)
   return strings.Split(regexp.MustCompile(`-|_|([a-z])([A-Z])`).ReplaceAllString(strings.Trim(str, `-|_| `), `$1 $2`), ` `)
 }
 
@@ -89,7 +91,7 @@ func Constantize(str string) string {
 func Humanize(str string) string {
   pieces := split(str)
 
-  pieces[0] = fmt.Sprintf(`%v%v`, strings.ToUpper(string(pieces[0][0])), pieces[0][1:])
+  pieces[0] = fmt.Sprintf(`%v%v`, strings.ToUpper(string(pieces[0][0])), strings.ToLower(pieces[0][1:]))
 
   for i := 1; i < len(pieces); i++ {
     pieces[i] = fmt.Sprintf(`%v`, strings.ToLower(pieces[i]))
