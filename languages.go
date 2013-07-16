@@ -6,8 +6,12 @@ import (
 )
 
 var (
+  // LANGUAGE to use when converting a word from it's plural to
+  // singular forms and vice versa.
   LANGUAGE = "en"
-  LANGUAGES = map[string]*types.LanguageType {
+  // LANGUAGES avaiable for converting a word from
+  // it's plural to singular forms and vice versa.
+  LANGUAGES = map[string]*types.LanguageType{
     "en": languages.English,
   }
 )

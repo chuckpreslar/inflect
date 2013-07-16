@@ -6,20 +6,20 @@ import (
   "strings"
 )
 
-func Pluralize(str string) string {
+func Pluralize(word string) string {
   if inflector, ok := LANGUAGES[LANGUAGE]; ok {
-    return inflector.Pluralize(str)
+    return inflector.Pluralize(word)
   }
 
-  return str
+  return word
 }
 
-func Singularize(str string) string {
+func Singularize(word string) string {
   if inflector, ok := LANGUAGES[LANGUAGE]; ok {
-    return inflector.Singularize(str)
+    return inflector.Singularize(word)
   }
 
-  return str
+  return word
 }
 
 // Split's a string so that it can be converted to a different casing.
@@ -30,7 +30,7 @@ func split(str string) []string {
   return strings.Split(regexp.MustCompile(`-|_|([a-z])([A-Z])`).ReplaceAllString(strings.Trim(str, `-|_| `), `$1 $2`), ` `)
 }
 
-// Converts a string to it's upper camel case version.
+// UpperCamelCase converts a string to it's upper camel case version.
 func UpperCamelCase(str string) string {
   pieces := split(str)
 
@@ -41,7 +41,7 @@ func UpperCamelCase(str string) string {
   return strings.Join(pieces, ``)
 }
 
-// Converts a string to it's lower camel case version.
+// LowerCamelCase converts a string to it's lower camel case version.
 func LowerCamelCase(str string) string {
   pieces := split(str)
 
@@ -54,7 +54,7 @@ func LowerCamelCase(str string) string {
   return strings.Join(pieces, ``)
 }
 
-// Converts a string to it's underscored version.
+// Underscore converts a string to it's underscored version.
 func Underscore(str string) string {
   pieces := split(str)
 
@@ -65,7 +65,7 @@ func Underscore(str string) string {
   return strings.Join(pieces, `_`)
 }
 
-// Converts a string to it's underscored version.
+// Hyphenate converts a string to it's hyphenated version.
 func Hyphenate(str string) string {
   pieces := split(str)
 
@@ -76,7 +76,7 @@ func Hyphenate(str string) string {
   return strings.Join(pieces, `-`)
 }
 
-// Converts a string to it's constantized version.
+// Constantize converts a string to it's constantized version.
 func Constantize(str string) string {
   pieces := split(str)
 
@@ -87,7 +87,7 @@ func Constantize(str string) string {
   return strings.Join(pieces, `_`)
 }
 
-// Converts a string to it's humanized version.
+// Humanize converts a string to it's humanized version.
 func Humanize(str string) string {
   pieces := split(str)
 
@@ -100,7 +100,7 @@ func Humanize(str string) string {
   return strings.Join(pieces, ` `)
 }
 
-// Converts a string to it's titleized version.
+// Titleize converts a string to it's titleized version.
 func Titleize(str string) string {
   pieces := split(str)
 

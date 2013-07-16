@@ -4,7 +4,11 @@ import (
   "github.com/chuckpreslar/inflect/types"
 )
 
-// FIXME: Singular/Plural rules could be better, I'm went to school for engineering, not English.
+// Defines irregular words, uncountables words, and pluralization/singularization
+// rules for the English language.
+//
+// FIXME: Singular/Plural rules could be better,
+// I'm went to school for engineering, not English.
 var English = types.Language("en").
   // Pluralization rules.
   Plural(`(auto)$`, `${1}s`).
