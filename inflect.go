@@ -6,20 +6,20 @@ import (
   "strings"
 )
 
-func Pluralize(word string) string {
+func Pluralize(str string) string {
   if inflector, ok := LANGUAGES[LANGUAGE]; ok {
-    return inflector.Pluralize(word)
+    return inflector.Pluralize(str)
   }
 
-  return word
+  return str
 }
 
-func Singularize(word string) string {
+func Singularize(str string) string {
   if inflector, ok := LANGUAGES[LANGUAGE]; ok {
-    return inflector.Singularize(word)
+    return inflector.Singularize(str)
   }
 
-  return word
+  return str
 }
 
 // Split's a string so that it can be converted to a different casing.
