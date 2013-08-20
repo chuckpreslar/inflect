@@ -1,3 +1,4 @@
+// Package inflect implements an inflector to switch common words.
 package inflect
 
 import (
