@@ -1,4 +1,4 @@
-// Package inflect implements an inflector.
+// Package inflect provides an inflector.
 package inflect
 
 import (
