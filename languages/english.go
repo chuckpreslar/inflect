@@ -1,3 +1,4 @@
+// Package languages provides language rules to use with the inflect package.
 package languages
 
 import (

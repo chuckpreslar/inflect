@@ -1,3 +1,4 @@
+// Package types contains common types useful to the inflect package.
 package types
 
 // LanguageType provides a structure for storing inflections rules of a language.

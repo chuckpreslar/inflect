@@ -1,4 +1,4 @@
-// Package inflect implements an inflector to switch common words.
+// Package inflect provides an inflector.
 package inflect
 
 import (
@@ -8,7 +8,7 @@ import (
 )
 
 func Pluralize(str string) string {
-  if inflector, ok := LANGUAGES[LANGUAGE]; ok {
+  if inflector, ok := Languages[Language]; ok {
     return inflector.Pluralize(str)
   }
 
@@ -16,7 +16,7 @@ func Pluralize(str string) string {
 }
 
 func Singularize(str string) string {
-  if inflector, ok := LANGUAGES[LANGUAGE]; ok {
+  if inflector, ok := Languages[Language]; ok {
     return inflector.Singularize(str)
   }
 

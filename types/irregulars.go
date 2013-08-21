@@ -1,3 +1,4 @@
+// Package types contains common types useful to the inflect package.
 package types
 
 // IrregularType provides a structure for irregular words that do not follow standard rules.

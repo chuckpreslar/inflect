@@ -1,3 +1,4 @@
+// Package inflect implements an inflector.
 package inflect
 
 import (
@@ -6,12 +7,13 @@ import (
 )
 
 var (
-  // LANGUAGE to use when converting a word from it's plural to
+  // Language to use when converting a word from it's plural to
   // singular forms and vice versa.
-  LANGUAGE = "en"
-  // LANGUAGES avaiable for converting a word from
+  Language = "en"
+
+  // Languages avaiable for converting a word from
   // it's plural to singular forms and vice versa.
-  LANGUAGES = map[string]*types.LanguageType{
+  Languages = map[string]*types.LanguageType{
     "en": languages.English,
   }
 )
