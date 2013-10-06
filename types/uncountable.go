@@ -6,11 +6,11 @@ type UncountablesType []string
 
 // Contains returns a bool if the str is found in the UncountablesType.
 func (self UncountablesType) Contains(str string) bool {
-  for _, word := range self {
-    if word == str {
-      return true
-    }
-  }
+	for _, word := range self {
+		if word == str {
+			return true
+		}
+	}
 
-  return false
+	return false
 }
