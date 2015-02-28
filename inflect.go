@@ -23,6 +23,15 @@ func Singularize(str string) string {
 	return str
 }
 
+func FromNumber(str string, n int) string {
+	switch n {
+	case 1:
+		return Singularize(str)
+	default:
+		return Pluralize(str)
+	}
+}
+
 // Split's a string so that it can be converted to a different casing.
 // Splits on underscores, hyphens, spaces and camel casing.
 func split(str string) []string {
